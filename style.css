@@ -250,7 +250,8 @@ button:hover {
 }
 
 #greeting {
-    position: fixed; /* Cover the whole screen */
+    position: fixed;
+    /* Cover the whole screen */
     top: 0;
     left: 0;
     width: 100%;
@@ -258,20 +259,26 @@ button:hover {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #FFC0CB; /* Match the background color */
-    font-size: 2em; /* Adjust based on your design */
-    color: white; /* Text color */
-    z-index: 10; /* Ensure it's above other content */
+    background-color: #FFC0CB;
+    /* Match the background color */
+    font-size: 2em;
+    /* Adjust based on your design */
+    color: white;
+    /* Text color */
+    z-index: 10;
+    /* Ensure it's above other content */
 }
 
 .invitation {
     padding: 40px;
-    background: rgba(255, 255, 255, 0.9); /* Slightly transparent white background */
+    background: rgba(255, 255, 255, 0.9);
+    /* Slightly transparent white background */
     border-radius: 10px;
     width: 60%;
     max-width: 800px;
     font-size: 24px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Add shadow for depth */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow for depth */
 }
 
 button {
@@ -281,18 +288,22 @@ button {
     cursor: pointer;
     border: none;
     border-radius: 5px;
-    background-color: #FF69B4; /* Light pink color for buttons */
+    background-color: #FF69B4;
+    /* Light pink color for buttons */
     color: white;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s; /* Smooth transition for button color change */
+    transition: background-color 0.3s;
+    /* Smooth transition for button color change */
 }
 
 button:hover {
-    background-color: #FF1493; /* Darker pink on hover */
+    background-color: #FF1493;
+    /* Darker pink on hover */
 }
 
 #noBtn {
-    background-color: #6c757d; /* Gray color for "No" button */
+    background-color: #6c757d;
+    /* Gray color for "No" button */
 }
 
 #yesBtn:hover {
@@ -303,9 +314,11 @@ button:hover {
     0% {
         transform: scale(1);
     }
+
     50% {
         transform: scale(1.1);
     }
+
     100% {
         transform: scale(1);
     }
@@ -313,5 +326,5 @@ button:hover {
 
 .random-gif {
     /* Example style */
-    box-shadow: 0 0 10px rgba(0,0,0,0.5);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
