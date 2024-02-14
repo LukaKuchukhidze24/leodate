@@ -1,0 +1,46 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    background-image: url('background.webp');
+    background-size: cover;
+    background-position: center;
+}
+
+.content-container {
+    position: relative; /* Allows absolute positioning relative to this container */
+}
+
+.invitation {
+    padding: 40px; /* Increased padding */
+    background: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    width: 60%; /* Adjust width as needed for a bigger div */
+    max-width: 800px; /* Ensures the div does not get too wide on larger screens */
+    font-size: 24px; /* Larger text size */
+}
+
+button {
+    padding: 15px 30px; /* Increased padding for bigger buttons */
+    font-size: 20px; /* Larger font size */
+    margin: 10px; /* Ensure buttons are not too close to each other */
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #f2c14e; /* Example button color, adjust as needed */
+    color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Adds a subtle shadow for depth */
+}
+
+#yesBtn {
+    /* Specific styles for the "Yes" button if needed */
+}
+
+#noBtn {
+    background-color: #6c757d; /* Differentiate the "No" button, adjust color as needed */
+}
