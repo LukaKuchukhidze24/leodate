@@ -8,11 +8,31 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-        <div class="invitation">
-            <h1>Join Me for a Movie Night?</h1>
-            <button id="yesBtn">Yes 😊</button>
-            <button id="noBtn">No 🙃</button>
+    <div id="greeting">Hello Gabi</div>
+
+    <div class="container">
+        <div class="envelope-wrapper">
+            <div id="envelope" class="close">
+                <div class="front flap"></div>
+                <div class="front pocket"></div>
+                <div class="letter">
+                    <div class="words line1"></div>
+                    <div class="words line2"></div>
+                    <div class="words line3"></div>
+                    <div class="words line4"></div>
+                </div>
+            </div>
         </div>
+        <div class="buttons">
+            <button id="open">Open</button>
+            <button id="reset">Reset</button>
+        </div>
+    </div>
+    <div class="invitation" style="display: none;">
+        <h1>Join Me for a Onilne Movie Date?</h1>
+        <button id="yesBtn">Yes 😊</button>
+        <button id="noBtn">No 🙃</button>
+    </div>
     <img id="celebrationGIF" src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExbTkwaXRzczMxcXJ6NnJhYWRmcDJtNmQ2NGZ5bjczZWthY2F1d2x3MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ekwEeLxb7G4DW44YaK/giphy.gif" style="display: none; width: 100%; max-width: 600px; margin: auto; top: 50%; left: 50%; transform: translate(-50%, -50%); position: absolute;" alt="Celebration">
     <script src="script.js"></script>
 </body>

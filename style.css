@@ -1,18 +1,267 @@
-body, html {
+/* Your existing styles */
+body,
+html {
     margin: 0;
     padding: 0;
     height: 100%;
-    width: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    text-align: center;
-    background-color: #FFC0CB; /* Pretty pink color */
-    font-family: 'Montserrat', sans-serif; /* Use Montserrat font */
+    background-color: #FFC0CB;
+    /* Pretty pink color */
+    font-family: 'Montserrat', sans-serif;
+    /* Use Montserrat font */
 }
 
-.content-container {
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+.envelope-wrapper {
+    height: 380px;
+    margin-bottom: -55px;
+    /* Add margin to create space between envelope and buttons */
+}
+
+#envelope {
+    width: 280px;
+    height: 180px;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+    background-color: #f9c5c8;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    margin-bottom: 20px;
+}
+
+.front {
+    position: absolute;
+    width: 0;
+    height: 0;
+    z-index: 3;
+}
+
+.flap {
+    border-left: 140px solid transparent;
+    border-right: 140px solid transparent;
+    border-bottom: 82px solid transparent;
+    /* a little smaller */
+    border-top: 98px solid #ff3333;
+    /* a little larger */
+    transform-origin: top;
+    pointer-events: none;
+}
+
+.pocket {
+    border-left: 140px solid #ff9999;
+    border-right: 140px solid #ff9999;
+    border-bottom: 90px solid #fd8787;
+    border-top: 90px solid transparent;
+    border-bottom-left-radius: 6px;
+    border-bottom-right-radius: 6px;
+}
+
+.letter {
     position: relative;
+    background-color: #f9c5c8;
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+    height: 90%;
+    top: 5%;
+    border-radius: 6px;
+    box-shadow: 0 2px 26px rgba(0, 0, 0, 0.12);
+}
+
+.letter:after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-image: linear-gradient(180deg, rgba(255, 255, 255, 0) 25%, rgba(239, 215, 239, 0.7) 55%, #eed7ef 100%);
+}
+
+.words {
+    position: absolute;
+    left: 10%;
+    width: 80%;
+    height: 14%;
+    background-color: #fdb7ba;
+}
+
+.words.line1 {
+    top: 15%;
+    width: 20%;
+    height: 7%;
+}
+
+.words.line2 {
+    top: 30%;
+}
+
+.words.line3 {
+    top: 50%;
+}
+
+.words.line4 {
+    top: 70%;
+}
+
+.open .flap {
+    transform: rotateX(180deg);
+    transition: transform 0.4s ease, z-index 0.6s;
+    z-index: 1;
+}
+
+.close .flap {
+    transform: rotateX(0deg);
+    transition: transform 0.4s 0.6s ease, z-index 1s;
+    z-index: 5;
+}
+
+.close .letter {
+    transform: translateY(0px);
+    transition: transform 0.4s ease, z-index 1s;
+    z-index: 1;
+}
+
+.open .letter {
+    transform: translateY(-60px);
+    transition: transform 0.4s 0.6s ease, z-index 0.6s;
+    z-index: 2;
+}
+
+.a1 {
+    left: 20%;
+    transform: scale(0.6);
+    opacity: 1;
+    -webkit-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+    -moz-animation: slideUp 4s linear 1, sideSway 2s ease-in-out 4 alternate;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.7s;
+    animation-delay: 0.7s;
+}
+
+.a2 {
+    left: 55%;
+    transform: scale(1);
+    opacity: 1;
+    -webkit-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+    -moz-animation: slideUp 5s linear 1, sideSway 4s ease-in-out 2 alternate;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.7s;
+    animation-delay: 0.7s;
+}
+
+.a3 {
+    left: 10%;
+    transform: scale(0.8);
+    opacity: 1;
+    -webkit-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+    -moz-animation: slideUp 7s linear 1, sideSway 2s ease-in-out 6 alternate;
+    -webkit-animation-fill-mode: forwards;
+    animation-fill-mode: forwards;
+    -webkit-animation-delay: 0.7s;
+    animation-delay: 0.7s;
+}
+
+@-webkit-keyframes slideUp {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: -600px;
+    }
+}
+
+@keyframes slideUp {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: -600px;
+    }
+}
+
+@-webkit-keyframes sideSway {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 50px;
+    }
+}
+
+@keyframes sideSway {
+    0% {
+        margin-left: 0px;
+    }
+
+    100% {
+        margin-left: 50px;
+    }
+}
+
+/* Button styles */
+.buttons {
+    margin-top: -55px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+    background-color: #FF69B4;
+    /* Light pink color for buttons */
+    color: white;
+    transition: background-color 0.3s;
+    /* Smooth transition for button color change */
+    margin: 0 10px;
+    /* Adjust margin for spacing between buttons */
+}
+
+button:first-child {
+    margin-right: 5px;
+    /* Add a little more space between the first button and the envelope */
+}
+
+button:last-child {
+    margin-left: 5px;
+    /* Add a little more space between the last button and the envelope */
+}
+
+button:hover {
+    background-color: #FF1493;
+    /* Darker pink on hover */
+}
+
+#greeting {
+    position: fixed; /* Cover the whole screen */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FFC0CB; /* Match the background color */
+    font-size: 2em; /* Adjust based on your design */
+    color: white; /* Text color */
+    z-index: 10; /* Ensure it's above other content */
 }
 
 .invitation {
@@ -46,8 +295,23 @@ button:hover {
     background-color: #6c757d; /* Gray color for "No" button */
 }
 
-#celebrationGIF {
-    width: 80%; /* Adjust size of celebration GIF */
-    max-width: 400px;
-    border-radius: 10px;
+#yesBtn:hover {
+    animation: pulse 1s infinite;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+.random-gif {
+    /* Example style */
+    box-shadow: 0 0 10px rgba(0,0,0,0.5);
 }
