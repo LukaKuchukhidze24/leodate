@@ -31,73 +31,96 @@ document.addEventListener('DOMContentLoaded', function () {
     // Yes button event listener
     yesBtn.addEventListener('click', function () {
         invitation.style.display = 'none'; // Hide the invitation
-        document.getElementById('celebrationGIF').style.display = 'block'; // Show the GIF
-        document.querySelectorAll('.random-gif').forEach(gif => gif.remove()); 
-        occupiedAreas = []; 
+        document.getElementById('celebrationGIF').style.display = 'block'; // Show the celebration GIF
+
+        // Remove all .random-gif elements from the page
+        document.querySelectorAll('.random-gif').forEach(function (gif) {
+            gif.remove();
+        });
+        occupiedAreas = [];
+        // Reset the occupied areas to ensure a fresh start for positioning elements
+
     });
 
+    // Initialize the occupied areas array
     let occupiedAreas = [];
 
-// Function to update occupied areas with buttons' positions
-function updateOccupiedAreas() {
-    occupiedAreas = []; // Reset the array to update the positions
-    const buttons = [document.getElementById('yesBtn'), document.getElementById('noBtn')];
-    buttons.forEach(button => {
-        const rect = button.getBoundingClientRect();
-        occupiedAreas.push({
-            top: rect.top,
-            left: rect.left,
-            right: rect.right,
-            bottom: rect.bottom
+    // Update occupied areas with the positions of buttons and GIFs
+    function updateOccupiedAreas(reset = false) {
+        if (reset) {
+            occupiedAreas = [];
+        }
+        const elements = [document.getElementById('yesBtn'), document.getElementById('noBtn')];
+        elements.forEach(element => {
+            const rect = element.getBoundingClientRect();
+            occupiedAreas.push({
+                top: rect.top + window.scrollY,
+                left: rect.left + window.scrollX,
+                right: rect.right + window.scrollX,
+                bottom: rect.bottom + window.scrollY
+            });
         });
-    });
-}
+    }
 
-// Function to check if a new position is valid (not overlapping with occupied areas)
-function isValidPosition(x, y, width, height) {
-    return !occupiedAreas.some(area => {
-        return x < area.right && x + width > area.left && y < area.bottom && y + height > area.top;
-    });
-}
-a
+    // Check if a new position is valid (not overlapping with occupied areas)
+    function isValidPosition(x, y, width, height) {
+        return !occupiedAreas.some(area => {
+            return x < area.right && x + width > area.left && y < area.bottom && y + height > area.top;
+        });
+    }
 
-    // No button playful behavior
     noBtn.addEventListener('mouseover', function () {
-        const x = Math.random() * (window.innerWidth - this.clientWidth);
-        const y = Math.random() * (window.innerHeight - this.clientHeight);
-        this.style.position = 'fixed';
-        this.style.left = x + 'px';
-        this.style.top = y + 'px';
-        updateOccupiedAreas(); // Update the occupied areas with current positions
-    
+        moveNoButton(this);
+        displayNewGif();
+    });
+
+    function moveNoButton(button) {
+        let attempts = 0;
+        let newPositionFound = false;
+        while (!newPositionFound && attempts < 100) {
+            let newX = Math.random() * (window.innerWidth - button.offsetWidth);
+            let newY = Math.random() * (window.innerHeight - button.offsetHeight);
+            if (isValidPosition(newX, newY, button.offsetWidth, button.offsetHeight)) {
+                button.style.position = 'fixed';
+                button.style.left = `${newX}px`;
+                button.style.top = `${newY}px`;
+                newPositionFound = true;
+                updateOccupiedAreas(); // Update occupied areas after moving the button
+            }
+            attempts++;
+        }
+    }
+
+    function displayNewGif() {
         let img = document.createElement('img');
         img.src = 'https://media.giphy.com/media/sXv0vaA4331Ti/giphy.gif';
         img.style.width = '100px';
-        img.onload = function() {
-            let attempts = 0;
-            let positionFound = false;
-            while (attempts < 100 && !positionFound) {
-                let randomX = Math.floor(Math.random() * (window.innerWidth - this.width));
-                let randomY = Math.floor(Math.random() * (window.innerHeight - this.height));
-                
-                if (isValidPosition(randomX, randomY, this.width, this.height)) {
-                    img.style.position = 'absolute';
-                    img.style.left = `${randomX}px`;
-                    img.style.top = `${randomY}px`;
-                    document.body.appendChild(img);
-    
-                    // Add this GIF's area to the occupied areas
-                    occupiedAreas.push({
-                        top: randomY,
-                        left: randomX,
-                        right: randomX + this.width,
-                        bottom: randomY + this.height
-                    });
-                    positionFound = true;
-                }
-                attempts++;
+        img.style.position = 'absolute';
+        document.body.appendChild(img); // Temporarily add the img to calculate dimensions
+
+        let attempts = 0;
+        let positionFound = false;
+        while (attempts < 100 && !positionFound) {
+            let randomX = Math.random() * (window.innerWidth - img.width);
+            let randomY = Math.random() * (window.innerHeight - img.height);
+            if (isValidPosition(randomX, randomY, img.width, img.height)) {
+                img.style.left = `${randomX}px`;
+                img.style.top = `${randomY}px`;
+                positionFound = true;
+
+                // Add this GIF's area to the occupied areas
+                occupiedAreas.push({
+                    top: randomY,
+                    left: randomX,
+                    right: randomX + img.width,
+                    bottom: randomY + img.height
+                });
             }
-        };
-        img.classList.add('random-gif');
-    });
+            attempts++;
+        }
+
+        if (!positionFound) {
+            document.body.removeChild(img);
+        }
+    }
 });
